@@ -23,9 +23,11 @@ There are three roles:
 
 1. Clone the repository from github https://github.com/ValentinGj06/urbanX.
 2. Install NPM globally if you haven't installed that already.
-3. After installing NPM globally , run npm install inside your cloned folder, it will download all the required dependencies.
-4. Install composer to your system and run composer install inside your cloned folder to install all laravel/php dependencies.
-5. Create an .env file by running the following command: cp .env.example .env. Or alternately you can just copy .env.example file to the    same folder and re-name it to .env.
-6. run command: php artisan key:generate to generate a unique application key.
+3. After installing NPM globally , run `npm install` inside your cloned folder, it will download all the required dependencies.
+4. Install composer to your system and run `composer install` inside your cloned folder to install all laravel/php dependencies.
+5. Create an `.env` file by running the following command: `cp .env.example .env`. Or alternately you can just copy `.env.example` file to the same folder and re-name it to `.env`.
+6. run command: `php artisan key:generate` to generate a unique application key.
+7. migrate the database, run `php artisan migrate`.
+8. seed the database, run `php artisan db:seed`.
 
 The urbanX web application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
