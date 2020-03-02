@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 
 @section('content')
 <div class="container">
@@ -13,8 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    Welcome <b>{{ Auth::user()->first_name.' '.Auth::user()->last_name
+                     }}</b>
                     You are logged in!
+                    Your role/s is/are: {{ implode(', ', Auth::user()->roles->pluck('name')->toArray()) }}
                 </div>
             </div>
         </div>

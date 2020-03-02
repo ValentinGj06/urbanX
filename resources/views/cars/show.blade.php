@@ -22,6 +22,7 @@
                 <th>Year</th>
                 <th>Type of Fuel</th>
                 <th>Price Per Day</th>
+                <th>Status</th>
                 <th>Location</th>
                 <th>Actions</th>
             </tr>
@@ -34,11 +35,32 @@
                     <td>{{ $car->year }}</td>
                     <td>{{ $car->type_of_fuel }}</td>
                     <td>{{ '$'.$car->price_per_day }}</td>
+                    <td><span class="badge <?= ($car->status === 'available') ? 'badge-success' : 'badge-info' ?>">{{ $car->status }}</span></td>
                     <td>{{ $location->name.', '.$location->address }}</td>
                     <td>
-<!--                         <a href="/cars/{{ $car->id }}"><button class="btn btn-primary">View</button></a>
- -->                        <a href="/cars/{{ $car->id }}/edit"><button class="btn btn-primary">Edit</button></a>
+                        @if($car->status === 'available')
+                        @can('rent')
+                        <form action="/cars/{{ $car->id }}" method="POST" class="float-left mr-2">
+                            @csrf
+                            {{ method_field('PATCH')}}
+                            <input type="hidden" name="status" value="rented">
+                            <button type="submit" class="btn btn-secondary">Rent</button>
+                        </form>
+                        @endcan
+                        @else
+                        @can('cancel')
+                        <form action="/cars/{{ $car->id }}" method="POST" class="float-left mr-2">
+                            @csrf
+                            {{ method_field('PATCH')}}
+                            <input type="hidden" name="status" value="available">
+                            <button type="submit" class="btn btn-success">Finish</button>
+                        </form>
+                        @endcan
+                        @endif
+                        @can('cars-management')
+                        <a href="/cars/{{ $car->id }}/edit"><button class="btn btn-primary">Edit</button></a>
                         <a href="/cars/{{ $car->id }}/delete"><button class="btn btn-primary">Delete</button></a>
+                        @endcan
                     </td>
                 </tr>
             </tbody>

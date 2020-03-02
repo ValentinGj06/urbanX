@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class LocationController extends Controller
 {
@@ -30,6 +31,10 @@ class LocationController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('locations-management')){
+            return redirect(route('locations'));
+        }
+
         return view ('locations.create');
     }
 
@@ -66,6 +71,10 @@ class LocationController extends Controller
      */
     public function edit(Location $location)
     {
+        if(Gate::denies('locations-management')){
+            return redirect(route('locations'));
+        }
+
         return view ('locations.edit', compact('location'));
     }
 
@@ -89,6 +98,10 @@ class LocationController extends Controller
      */
     public function destroy(Location $location)
     {
+        if(Gate::denies('locations-management')){
+            return redirect(route('locations'));
+        }
+
         $location->delete();
         return redirect('locations')->with('success', 'Successfully deleted location!');
     }

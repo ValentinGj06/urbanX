@@ -22,11 +22,12 @@ class CreateCarsTable extends Migration
             $table->unsignedInteger('year');
             $table->string('type_of_fuel');
             $table->double('price_per_day');
+            $table->string('status')->default('available');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
         });
     }
 

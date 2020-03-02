@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/admin/users', 'Admin\UsersController', ['except' => ['show', 'create', 'store']]);
+Route::resource('/admin/users', 'Admin\UsersController', ['except' => ['show', 'create', 'store']])->middleware('can:user-management');
 
 // Locations routes
 Route::get('/locations', 'LocationController@index')->name('locations');
@@ -36,6 +36,7 @@ Route::get('/{location}/cars/create', 'CarController@create')->name('create');
 Route::post('/{location}/cars/create', 'CarController@create')->name('create_post');
 Route::post('/cars', 'CarController@store')->name('store');
 Route::get('/cars/{car}', 'CarController@show')->name('show');
+Route::get('/mycars', 'CarController@showCarsFromOwner')->name('mycars');
 Route::get('/cars/{car}/edit', 'CarController@edit')->name('edit');
 Route::patch('/cars/{car}', 'CarController@update')->name('update');
 Route::delete('/cars/{car}', 'CarController@destroy')->name('destroy');

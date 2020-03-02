@@ -1,11 +1,7 @@
-<!-- <nav class="navbar navbar-expand navbar-dark bg-primary mb-3">     
-    <div class="navbar-nav w-100">
-        <a class="navbar-brand text-color" href="/">Home</a>
-        <a class="nav-item nav-link" href="/companies">Browse Companies</a>
-        <a class="nav-item nav-link" href="/employees">Browse Employees</a>
-    </div>
-</nav> -->
 <style type="text/css">
+body {
+  background: #f0f3f9;
+}
 	/* Sidebar */
 #sidebar-wrapper{
   z-index:1;
@@ -13,13 +9,12 @@
   width:0;
   height:100vh;
   overflow-y:hidden;
-  background: #382525;
+  background: #eceef5;
   opacity:0.9;
 	transition:all .5s;
 	display:flex;
 	align-items:center;
 }
-
 /* Main Content */
 #page-content-wrapper{
   width: 100%;	
@@ -60,13 +55,16 @@
 .sidebar-nav li a {
   display:block;
   text-decoration:none;
-  color:#b8a0a0;
+  color:#303b51;
 }
 
 .sidebar-nav li:hover{
-  background:#846bab;
+  background:#c9ccd3;
 }
 
+.sidebar-nav a:hover{
+  color:#193e87;
+}
 
 </style>
 <div id="wrapper" class="menuDisplayed">
@@ -75,8 +73,11 @@
   <ul class="sidebar-nav">
     <div id="logo"><a class="navbar-brand text-color" href="/home"><img src="{{ asset('img/logo.png') }}"></a></div>  
     <li><a class="navbar-brand text-color" href="/home">Home</a></li>
-    <li><a class="navbar-brand text-color" href="{{ route('users.index') }}">Admin</a></li>
+    @can('user-management')
+    <li><a class="navbar-brand text-color" href="{{ route('users.index') }}">User Management</a></li>
     <li><a class="nav-item nav-link" href="/locations/create">Add Location</a></li>
+    <li><a class="nav-item nav-link" href="/mycars">My Cars</a></li>
+    @endcan
     <li><a class="nav-item nav-link" href="/locations">Browse Locations</a></li>
     <li><a class="nav-item nav-link" href="/cars">Browse Cars</a></li>
     @guest
@@ -91,7 +92,7 @@
     	@else
         <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                {{ Auth::user()->name }} <span class="caret"></span>
+                {{ Auth::user()->first_name.' '.Auth::user()->last_name }} <span class="caret"></span>
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
