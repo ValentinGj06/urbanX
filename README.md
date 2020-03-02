@@ -15,9 +15,9 @@ urbanX is a web application for renting a cars. Guests can make an account and p
 There are three roles:
 - `admin` **email:** admin@admin.com | **password:** password
 
-- `user` email: user@user.com | password: password
+- `user` **email:** user@user.com | **password:** password
 
-- `customer` email: customer@customer.com | password: password
+- `customer` **email:** customer@customer.com | **password:** password
 
 ## Instalation urbanX
 
