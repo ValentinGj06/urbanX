@@ -17,29 +17,29 @@
                           <th scope="col">Role</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                          <th scope="row">{{ $user->id }}</th>
-                          <td>{{ $user->first_name.' '. $user->last_name }}</td>
-                          <td>{{ $user->email }}</td>
-                          <td>
-                          <select id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="roles[]" required autofocus>
-                            @foreach($roles as $role)
-                              <option value="{{ $role->id }}" @if($user->roles->pluck('id')->contains($role->id)) selected @endif >{{ $role->name }}</option>
-                            @endforeach
-                          </select>
-                          </td>
-                          <td>
-                            @can('edit')
-                            <form action="{{ route('users.update', $user) }}" method="POST" class="float-left">
-                                @csrf
-                                {{ method_field('PUT')}}
-                                <button type="submit" class="btn btn-danger">Update</button>
-                            </form>
-                            @endcan
-                          </td>
-                        </tr>
-                        </tbody>
+                        @can('edit')
+                        <form action="{{ route('users.update', $user) }}" method="POST" class="float-left">
+                          @csrf
+                          {{ method_field('PUT')}}
+                          <tbody>
+                          <tr>
+                            <th scope="row">{{ $user->id }}</th>
+                            <td>{{ $user->first_name.' '. $user->last_name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                            <select id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="roles[]" required autofocus>
+                              @foreach($roles as $role)
+                                <option value="{{ $role->id }}" @if($user->roles->pluck('id')->contains($role->id)) selected @endif >{{ $role->name }}</option>
+                              @endforeach
+                            </select>
+                            </td>
+                            <td>
+                              <button type="submit" class="btn btn-danger">Update</button>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </form>
+                        @endcan
                     </table>
                 </div>
             </div>
